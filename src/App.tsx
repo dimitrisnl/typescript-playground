@@ -2,12 +2,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import * as actions from './state/actions';
-import { IStoreState, Item } from './state/types';
+import { Interest, IStoreState } from './state/types';
 
 interface IProps {
-  things: any;
-  addThing: (value: string) => void;
-  removeThing: (uuid: string) => void;
+  interests: Interest[];
+  addInterest: (value: string) => void;
+  removeInterest: (uuid: string) => void;
 }
 
 interface IState {
@@ -17,7 +17,6 @@ interface IState {
 class App extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-
     this.state = { currentInput: '' };
   }
 
@@ -30,7 +29,7 @@ class App extends React.Component<IProps, IState> {
     const target = event.target as HTMLButtonElement;
     const uuid = target.name as string;
 
-    this.props.removeThing(uuid);
+    this.props.removeInterest(uuid);
   };
 
   public handleKeydown = (event: any) => {
@@ -38,16 +37,16 @@ class App extends React.Component<IProps, IState> {
     const key = event.key;
 
     if (key === 'Enter') {
-      this.props.addThing(target.value);
+      this.props.addInterest(target.value);
       this.setState({ currentInput: '' });
     }
   };
 
   public render() {
-    const selections = this.props.things.map((item: Item) => (
-      <div key={item.uuid}>
-        {item.value}
-        <button name={item.uuid} onClick={this.handleRemove}>
+    const selections = this.props.interests.map((interest: Interest) => (
+      <div key={interest.uuid}>
+        {interest.name}
+        <button name={interest.uuid} onClick={this.handleRemove}>
           ×
         </button>
       </div>
@@ -62,22 +61,22 @@ class App extends React.Component<IProps, IState> {
           onChange={this.handleChange}
           onKeyPress={this.handleKeydown}
         />
-        <button disabled={this.props.things.length === 0}>I'm done</button>
+        <button disabled={this.props.interests.length === 0}>I'm done</button>
       </div>
     );
   }
 }
 
-export const mapStateToProps = ({ things }: IStoreState) => {
-  return {
-    things,
-  };
+export const mapStateToProps = ({ interests }: IStoreState) => {
+  return { interests };
 };
 
-export const mapDispatchToProps = (dispatch: Dispatch<actions.ThingAction>) => {
+export const mapDispatchToProps = (
+  dispatch: Dispatch<actions.InterestAction>
+) => {
   return {
-    addThing: (value: string) => dispatch(actions.addThing(value)),
-    removeThing: (uuid: string) => dispatch(actions.removeThing(uuid)),
+    addInterest: (value: string) => dispatch(actions.addInterest(value)),
+    removeInterest: (value: string) => dispatch(actions.removeInterest(value)),
   };
 };
 

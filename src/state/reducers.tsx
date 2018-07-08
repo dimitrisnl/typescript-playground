@@ -1,20 +1,29 @@
 import { v4 as generateId } from 'uuid';
-import { ThingAction } from './actions';
-import { ADD_THING, REMOVE_THING } from './constants';
+import { InterestAction } from './actions';
+import { ADD_INTEREST, REMOVE_INTEREST } from './constants';
 import { IStoreState } from './types';
 
-export const thing = (state: IStoreState, action: ThingAction): IStoreState => {
-  console.log(action);
+export const interestState = {
+  interests: [],
+};
+
+export const interestReducer = (
+  state: IStoreState,
+  action: InterestAction
+): IStoreState => {
   switch (action.type) {
-    case ADD_THING:
+    case ADD_INTEREST:
       return {
         ...state,
-        things: [...state.things, { uuid: generateId(), value: action.value }],
+        interests: [
+          ...state.interests,
+          { uuid: generateId(), name: action.value },
+        ],
       };
-    case REMOVE_THING:
+    case REMOVE_INTEREST:
       return {
         ...state,
-        things: state.things.filter(x => x.uuid !== action.uuid),
+        interests: state.interests.filter(x => x.uuid !== action.value),
       };
   }
   return state;

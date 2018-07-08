@@ -1,5 +1,5 @@
-export const ADD_THING = 'ADD_THING';
-export type ADD_THING = typeof ADD_THING;
+export const ADD_INTEREST = 'ADD_INTEREST';
+export type ADD_INTEREST = typeof ADD_INTEREST;
 
-export const REMOVE_THING = 'REMOVE_THING';
-export type REMOVE_THING = typeof REMOVE_THING;
+export const REMOVE_INTEREST = 'REMOVE_INTEREST';
+export type REMOVE_INTEREST = typeof REMOVE_INTEREST;

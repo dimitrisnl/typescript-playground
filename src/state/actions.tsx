@@ -1,23 +1,23 @@
 import * as constants from './constants';
 
-export interface IAddThing {
-  type: constants.ADD_THING;
+export interface IAddInterest {
+  type: constants.ADD_INTEREST;
   value: string;
 }
 
-export interface IRemoveThing {
-  type: constants.REMOVE_THING;
-  uuid: string;
+export interface IRemoveInterest {
+  type: constants.REMOVE_INTEREST;
+  value: string;
 }
 
-export type ThingAction = IAddThing | IRemoveThing;
+export type InterestAction = IAddInterest | IRemoveInterest;
 
-export const addThing = (value: string): IAddThing => ({
-  type: constants.ADD_THING,
+export const addInterest = (value: string): IAddInterest => ({
+  type: constants.ADD_INTEREST,
   value,
 });
 
-export const removeThing = (uuid: string): IRemoveThing => ({
-  type: constants.REMOVE_THING,
-  uuid,
+export const removeInterest = (value: string): IRemoveInterest => ({
+  type: constants.REMOVE_INTEREST,
+  value,
 });

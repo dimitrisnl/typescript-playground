@@ -1,15 +1,13 @@
-import { createStore } from 'redux';
-// import logger from 'redux-logger';
-import { ThingAction } from './actions';
-import { thing } from './reducers';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
+import { InterestAction } from './actions';
+import { interestReducer, interestState } from './reducers';
 import { IStoreState } from './types';
 
-// const loggerMiddleware = (logger as any)();
-
-const store = createStore<IStoreState, ThingAction, null, null>(thing, {
-  things: [],
-  // applyMiddleware(logger),
-  // null
-});
+const store = createStore<IStoreState, InterestAction, any, null>(
+  interestReducer,
+  interestState,
+  applyMiddleware(logger)
+);
 
 export default store;

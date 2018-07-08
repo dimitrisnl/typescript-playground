@@ -1,8 +1,8 @@
-export interface Item {
+export interface Interest {
   uuid: string;
-  value: string;
+  name: string;
 }
 
 export interface IStoreState {
-  things: Item[];
+  interests: Interest[];
 }
