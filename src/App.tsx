@@ -1,5 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import {
+  Button,
+  Card,
+  CardBody,
+  Input,
+  ListGroup,
+  ListGroupItem,
+} from 'reactstrap';
 import * as actions from './state/actions';
 import { Interest, IStoreState } from './state/types';
 
@@ -40,33 +48,59 @@ class App extends React.Component<IProps, IState> {
     const target = event.target as HTMLInputElement;
     const key = event.key;
 
+    if (target.value.trim() === '') {
+      return;
+    }
+
     if (key === 'Enter') {
       this.props.addInterest(target.value);
       this.setState({ currentInput: '' });
     }
   };
 
-  public render() {
-    const selections = this.props.interests.map((interest: Interest) => (
-      <div key={interest.uuid}>
-        {interest.name}
-        <button name={interest.uuid} onClick={this.handleRemove}>
-          ×
-        </button>
-      </div>
-    ));
+  public getInterests = () => (
+    <ListGroup flush={true}>
+      {this.props.interests.map((interest: Interest) => (
+        <ListGroupItem key={interest.uuid}>
+          <div className="d-flex justify-content-between">
+            {interest.name}
+            <Button
+              color="danger"
+              size="sm"
+              outline={true}
+              name={interest.uuid}
+              onClick={this.handleRemove}
+            >
+              ×
+            </Button>
+          </div>
+        </ListGroupItem>
+      ))}
+    </ListGroup>
+  );
 
+  public render() {
     return (
-      <div>
-        {selections}
-        <input
-          value={this.state.currentInput}
-          name="current"
-          onChange={this.handleChange}
-          onKeyPress={this.handleKeydown}
-        />
-        <button disabled={this.props.interests.length === 0}>I'm done</button>
-      </div>
+      <Card>
+        <CardBody>{this.getInterests()}</CardBody>
+        <CardBody>
+          <Input
+            placeholder="Interest.."
+            value={this.state.currentInput}
+            name="current"
+            onChange={this.handleChange}
+            onKeyPress={this.handleKeydown}
+            className="mb-3"
+          />
+          <Button
+            block={true}
+            color="success"
+            disabled={this.props.interests.length === 0}
+          >
+            I'm done
+          </Button>
+        </CardBody>
+      </Card>
     );
   }
 }
