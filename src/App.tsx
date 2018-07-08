@@ -1,14 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import * as actions from './state/actions';
 import { Interest, IStoreState } from './state/types';
 
-interface IProps {
+interface IStateProps {
   interests: Interest[];
+}
+
+interface IDispatchProps {
   addInterest: (value: string) => void;
   removeInterest: (uuid: string) => void;
 }
+
+type IProps = IStateProps & IDispatchProps;
 
 interface IState {
   currentInput: string;
@@ -67,20 +71,10 @@ class App extends React.Component<IProps, IState> {
   }
 }
 
-export const mapStateToProps = ({ interests }: IStoreState) => {
-  return { interests };
-};
-
-export const mapDispatchToProps = (
-  dispatch: Dispatch<actions.InterestAction>
-) => {
-  return {
+export default connect<IStateProps, IDispatchProps, {}, IStoreState>(
+  state => ({ interests: state.interests }),
+  dispatch => ({
     addInterest: (value: string) => dispatch(actions.addInterest(value)),
     removeInterest: (value: string) => dispatch(actions.removeInterest(value)),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App as any);
+  })
+)(App);

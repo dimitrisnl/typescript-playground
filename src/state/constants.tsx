@@ -1,5 +1,4 @@
-export const ADD_INTEREST = 'ADD_INTEREST';
-export type ADD_INTEREST = typeof ADD_INTEREST;
-
-export const REMOVE_INTEREST = 'REMOVE_INTEREST';
-export type REMOVE_INTEREST = typeof REMOVE_INTEREST;
+export enum t {
+  ADD_INTEREST = 'ADD_INTEREST',
+  REMOVE_INTEREST = 'REMOVE_INTEREST',
+}

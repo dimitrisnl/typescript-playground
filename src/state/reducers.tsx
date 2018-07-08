@@ -1,6 +1,6 @@
 import { v4 as generateId } from 'uuid';
-import { InterestAction } from './actions';
-import { ADD_INTEREST, REMOVE_INTEREST } from './constants';
+import { ActionTypes } from './actions';
+import { t } from './constants';
 import { IStoreState } from './types';
 
 export const interestState = {
@@ -9,10 +9,10 @@ export const interestState = {
 
 export const interestReducer = (
   state: IStoreState,
-  action: InterestAction
+  action: ActionTypes
 ): IStoreState => {
   switch (action.type) {
-    case ADD_INTEREST:
+    case t.ADD_INTEREST:
       return {
         ...state,
         interests: [
@@ -20,7 +20,7 @@ export const interestReducer = (
           { uuid: generateId(), name: action.value },
         ],
       };
-    case REMOVE_INTEREST:
+    case t.REMOVE_INTEREST:
       return {
         ...state,
         interests: state.interests.filter(x => x.uuid !== action.value),
