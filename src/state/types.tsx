@@ -3,6 +3,4 @@ export interface Interest {
   name: string;
 }
 
-export interface IStoreState {
-  interests: Interest[];
-}
+export type InterestsState = Interest[];

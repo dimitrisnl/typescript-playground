@@ -8,8 +8,10 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'reactstrap';
+import { Dispatch } from 'redux';
 import * as actions from './state/actions';
-import { Interest, IStoreState } from './state/types';
+import { IRootState } from './state/root';
+import { Interest } from './state/types';
 
 interface IStateProps {
   interests: Interest[];
@@ -26,7 +28,7 @@ interface IState {
   currentInput: string;
 }
 
-class App extends React.Component<IProps, IState> {
+class Interests extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = { currentInput: '' };
@@ -105,10 +107,16 @@ class App extends React.Component<IProps, IState> {
   }
 }
 
-export default connect<IStateProps, IDispatchProps, {}, IStoreState>(
-  state => ({ interests: state.interests }),
-  dispatch => ({
-    addInterest: (value: string) => dispatch(actions.addInterest(value)),
-    removeInterest: (value: string) => dispatch(actions.removeInterest(value)),
-  })
-)(App);
+const mapStateToProps = (state: IRootState) => ({
+  interests: state.interests,
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addInterest: (value: string) => dispatch(actions.addInterest(value)),
+  removeInterest: (uuid: string) => dispatch(actions.removeInterest(uuid)),
+});
+
+export default connect<IStateProps, IDispatchProps, any>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Interests);
