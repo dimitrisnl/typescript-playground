@@ -1,4 +1,4 @@
-import { v4 as generateId } from 'uuid';
+import * as shortid from 'shortid';
 import { ActionTypes } from './actions';
 import { t } from './constants';
 import { IStoreState } from './types';
@@ -17,7 +17,7 @@ export const interestReducer = (
         ...state,
         interests: [
           ...state.interests,
-          { uuid: generateId(), name: action.value },
+          { uuid: shortid.generate(), name: action.value },
         ],
       };
     case t.REMOVE_INTEREST:
