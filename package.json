@@ -4,16 +4,16 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",
-    "connected-react-router": "^4.3.0",
+    "connected-react-router": "^6.1.0",
     "history": "^4.7.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^4.3.3",
-    "react-redux": "^5.0.7",
+    "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "2.16.0",
-    "reactstrap": "^6.2.0",
+    "react-scripts-ts": "3.1.0",
+    "reactstrap": "^7.0.2",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "shortid": "^2.2.10"
@@ -37,6 +37,6 @@
     "@types/redux-logger": "^3.0.6",
     "@types/shortid": "^0.0.29",
     "@types/webpack-env": "^1.13.6",
-    "typescript": "^2.9.2"
+    "typescript": "^3.2.2"
   }
 }
